@@ -1,0 +1,5 @@
+Plugin:
+  Prefix: "&7[&9&lCustomPapi&7] &r"
+  INFO: "&7[&a*&7] &r"
+  WARN: "&7[&e*&7] &r"
+  ERROR: "&7[&c!&7] &r"

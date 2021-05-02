@@ -1,0 +1,9 @@
+name: CustomPapi
+version: ${project.version}
+main: me.mical.custompapi.CustomPapi
+authors: [ Mical ]
+commands:
+  custompapi:
+    aliases:
+      - cpapi
+      - cp

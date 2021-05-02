@@ -1,0 +1,5 @@
+Params:
+  HelloWorld:
+    DefaultValue: 200.0
+    EnableRefresh: true
+    RefreshTime: 60
