@@ -30,6 +30,8 @@ public class SetCommand extends BaseCommand {
                         .keySet())
                         .toArray(new String[0])
                 )
+                .validate(s -> ParamManager.getInstance().getParams().containsKey(s))
+                .validateMessage(warn("您输入的变量不存在."))
                 .converter(strings -> strings[1])
                 .build());
         addParam(CommandParam.aDouble(

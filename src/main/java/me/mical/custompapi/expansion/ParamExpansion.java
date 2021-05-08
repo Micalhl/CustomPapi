@@ -6,8 +6,6 @@ import me.mical.custompapi.config.DataManager;
 import org.serverct.parrot.parrotx.api.ParrotXAPI;
 import org.serverct.parrot.parrotx.hooks.BaseExpansion;
 
-import java.util.Arrays;
-
 public class ParamExpansion extends BaseExpansion {
     public ParamExpansion() {
         super(
@@ -20,8 +18,6 @@ public class ParamExpansion extends BaseExpansion {
         addParam(PlaceholderParam.builder()
                 .name("param")
                 .parse((offlinePlayer, strings) -> {
-                    System.out.println(Arrays.toString(strings));
-                    System.out.println(DataManager.getInstance().get(offlinePlayer.getUniqueId().toString()).getParams().containsKey(strings));
                     if (DataManager.getInstance().get(offlinePlayer.getUniqueId().toString()).getParams().containsKey(strings[0])) {
                         return String.valueOf(DataManager.getInstance().get(offlinePlayer.getUniqueId().toString()).getParams().get(strings[0]).getValue());
                     }

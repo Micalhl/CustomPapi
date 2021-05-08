@@ -1,10 +1,7 @@
 package me.mical.custompapi.command;
 
 import me.mical.custompapi.CustomPapi;
-import me.mical.custompapi.command.impl.AddCommand;
-import me.mical.custompapi.command.impl.CreateCommand;
-import me.mical.custompapi.command.impl.SetCommand;
-import me.mical.custompapi.command.impl.TakeCommand;
+import me.mical.custompapi.command.impl.*;
 import org.serverct.parrot.parrotx.api.ParrotXAPI;
 import org.serverct.parrot.parrotx.command.subcommands.DebugCommand;
 import org.serverct.parrot.parrotx.command.subcommands.HelpCommand;
@@ -25,5 +22,6 @@ public class CommandHandler extends org.serverct.parrot.parrotx.command.CommandH
         register(new SetCommand(plugin));
         register(new TakeCommand(plugin));
         register(new CreateCommand(plugin));
+        register(new APICommand(plugin));
     }
 }
