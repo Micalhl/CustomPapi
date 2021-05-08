@@ -8,12 +8,13 @@ import me.mical.custompapi.utils.StorageUtil;
 import org.bukkit.Bukkit;
 import org.serverct.parrot.parrotx.PPlugin;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public final class CustomPapi extends PPlugin {
 
     @Getter
-    private static List<String> addons;
+    private static List<String> addons = new ArrayList<>();
 
     @Override
     protected void preload() {
