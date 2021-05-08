@@ -26,11 +26,11 @@ public class APICommand extends BaseCommand {
         } else {
             final List<String> plugins = new ArrayList<>();
             CustomPapi.getAddons().forEach(p -> plugins.add("&c" + p));
-            sender.sendMessage(info("当前运行 &c{0} &f个附属: &f" + Joiner.on(", ").join(
+            sender.sendMessage(info("当前运行 &c{0} &f个附属: &f" + Joiner.on("&f, ").join(
                     plugins.stream()
                     .sorted(String.CASE_INSENSITIVE_ORDER)
                     .collect(Collectors.toList())
-            )));
+            ), plugins.size()));
         }
     }
 }

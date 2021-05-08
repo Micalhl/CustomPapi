@@ -1,4 +1,4 @@
 Language: Chinese
-bStats: false
+bStats: true
 Debug: false
 Prefix: "cpprefixtest"
