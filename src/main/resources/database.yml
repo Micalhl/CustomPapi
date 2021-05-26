@@ -1,0 +1,6 @@
+EnableMySQL: false
+SQLAddress: localhost
+SQLPort: 3306
+SQLDatabase: minecraft
+SQLName: custompapi
+SQLPassword: '123456'

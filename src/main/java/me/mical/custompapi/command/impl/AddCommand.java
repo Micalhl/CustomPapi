@@ -1,13 +1,16 @@
 package me.mical.custompapi.command.impl;
 
-import me.mical.custompapi.config.DataManager;
 import me.mical.custompapi.config.ParamManager;
-import org.bukkit.entity.Player;
+import me.mical.custompapi.utils.ParamUtil;
+import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
 import org.jetbrains.annotations.NotNull;
 import org.serverct.parrot.parrotx.PPlugin;
 import org.serverct.parrot.parrotx.command.BaseCommand;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
 public class AddCommand extends BaseCommand {
 
@@ -17,11 +20,18 @@ public class AddCommand extends BaseCommand {
         perm(".add");
         describe("为玩家的某变量添加数值.");
 
-        addParam(CommandParam.player(
-                0,
-                "玩家名",
-                args -> warn("玩家 &c{0} &f不在线或不存在.", args[0])
-        ));
+        addParam(CommandParam.builder()
+                .name("玩家 ID")
+                .description("玩家名")
+                .position(0)
+                .suggest(() -> Arrays.stream(Bukkit.getOfflinePlayers())
+                        .map(OfflinePlayer::getName)
+                        .collect(Collectors.toList())
+                        .toArray(new String[0]))
+                .validate(s -> Bukkit.getOfflinePlayer(s) != null)
+                .advancedValidateMessage(args -> warn("玩家 &c{0} &f不存在.", args[0]))
+                .converter(strings -> Bukkit.getOfflinePlayer(strings[0]))
+                .build());
         addParam(CommandParam.builder()
                 .name("变量名")
                 .description("变量名")
@@ -45,7 +55,7 @@ public class AddCommand extends BaseCommand {
 
     @Override
     protected void call(String[] strings) {
-        DataManager.getInstance().get(convert(0, strings, Player.class).getUniqueId().toString()).getParams().get(convert(1, strings, String.class)).addValue(convert(2, strings, Double.class));
-        sender.sendMessage(info("已成功为玩家 &c{0} &f的 &c{1} &f变量添加了数值 &c{2}&f.", convert(0, strings, Player.class).getName(), convert(1, strings, String.class), convert(2, strings, Double.class)));
+        ParamUtil.add(convert(1, strings, String.class), convert(0, strings, OfflinePlayer.class).getUniqueId(), convert(2, strings, Double.class));
+        sender.sendMessage(info("已成功为玩家 &c{0} &f的 &c{1} &f变量添加了数值 &c{2}&f.", convert(0, strings, OfflinePlayer.class).getName(), convert(1, strings, String.class), convert(2, strings, Double.class)));
     }
 }

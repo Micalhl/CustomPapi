@@ -1,7 +1,9 @@
 package me.mical.custompapi.command.impl;
 
-import me.mical.custompapi.config.DataManager;
 import me.mical.custompapi.config.ParamManager;
+import me.mical.custompapi.sql.DaoManager;
+import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.serverct.parrot.parrotx.PPlugin;
@@ -77,7 +79,10 @@ public class CreateCommand extends BaseCommand {
         message.add(I18n.color("您已成功创建变量 &c{0}&f, 详情信息如下:", convert(0, strings, String.class)));
         message.add(I18n.color("默认值: &a{0}&f.", convert(1, strings, Double.class)));
         message.add(I18n.color("开启自动刷新: {0}&f.", convert(2, strings, Boolean.class) ? "&a&l是" : "&c&l否"));
-        DataManager.getInstance().getAll().forEach(playerData -> playerData.addParam(ParamManager.getInstance().getParams().get(convert(0, strings, String.class))));
+        //DataManager.getInstance().getAll().forEach(playerData -> playerData.addParam(ParamManager.getInstance().getParams().get(convert(0, strings, String.class))));
+        for (OfflinePlayer offlinePlayer : Bukkit.getOfflinePlayers()) {
+            DaoManager.getDao().create(offlinePlayer.getUniqueId().toString(), convert(0, strings, String.class));
+        }
         if (convert(2, strings, Boolean.class)) {
             message.add(I18n.color("自动刷新间隔: &a{0}&f.", TimeUtil.getTimeLong(convert(3, strings, Integer.class), "{0}{1}")));
         }

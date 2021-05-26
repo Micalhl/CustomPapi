@@ -1,8 +1,9 @@
 package me.mical.custompapi.expansion;
 
+import com.google.common.base.Joiner;
 import me.mical.custompapi.CustomPapi;
 import me.mical.custompapi.config.ConfigManager;
-import me.mical.custompapi.config.DataManager;
+import me.mical.custompapi.utils.ParamUtil;
 import org.serverct.parrot.parrotx.api.ParrotXAPI;
 import org.serverct.parrot.parrotx.hooks.BaseExpansion;
 
@@ -17,12 +18,7 @@ public class ParamExpansion extends BaseExpansion {
 
         addParam(PlaceholderParam.builder()
                 .name("param")
-                .parse((offlinePlayer, strings) -> {
-                    if (DataManager.getInstance().get(offlinePlayer.getUniqueId().toString()).getParams().containsKey(strings[0])) {
-                        return String.valueOf(DataManager.getInstance().get(offlinePlayer.getUniqueId().toString()).getParams().get(strings[0]).getValue());
-                    }
-                    return "";
-                })
+                .parse((offlinePlayer, strings) -> String.valueOf(ParamUtil.get(Joiner.on('_').join(strings), offlinePlayer.getUniqueId())))
                 .build());
     }
 }
